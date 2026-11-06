@@ -7,7 +7,7 @@ $sidebarMenu = [
         'permission' => null,
     ],
     [
-        'title' => 'Products',
+        'title' => 'Products Management',
         'icon' => 'package',
         'url'  => baseURL('products'),
         'permission' => 'product.list',
