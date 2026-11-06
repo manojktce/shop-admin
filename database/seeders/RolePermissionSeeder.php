@@ -20,6 +20,7 @@ class RolePermissionSeeder extends Seeder
     public static array $permissions = [
         ['Users', ['user.list', 'user.create', 'user.edit'], []],
         ['Roles', ['role.list', 'role.create', 'role.edit', 'role.delete'], []],
+        ['Settings', ['setting.edit'], []],
     ];
 
     public function run(): void
