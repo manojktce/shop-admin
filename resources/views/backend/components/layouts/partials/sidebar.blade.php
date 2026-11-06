@@ -11,6 +11,12 @@ $sidebarMenu = [
         'icon' => 'settings',
         'children' => [
             [
+                'title' => 'Shop settings',
+                'icon' => 'circle',
+                'url'  => baseURL('settings'),
+                'permission' => 'setting.edit',
+            ],
+            [
                 'title' => 'Users',
                 'icon' => 'circle',
                 'url'  => baseURL('users'),

@@ -4,7 +4,7 @@
 |---|---|---|---|---|---|---|
 | 0 | Dependency fix | PR created | fix/composer-dependencies | 9d822a4 | https://github.com/manojktce/shop-admin/pull/1 | clean worktree: artisan boots; `php artisan test` 2/2 passed |
 | 1 | Login & roles | PR created | feature/login-roles | bace91d | https://github.com/manojktce/shop-admin/pull/2 (stacked on #1) | `php artisan test` 22/22 passed; code-reviewer + security-auditor findings fixed |
-| 2 | Shop settings | Not started | | | | |
+| 2 | Shop settings | Verified | feature/shop-settings | | | `php artisan test` 35/35 passed; code-reviewer findings fixed |
 | 3 | Masters | Not started | | | | |
 | 4 | Products | Not started | | | | |
 | 5 | Stock | Not started | | | | |

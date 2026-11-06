@@ -5,7 +5,7 @@
 | R-01 | DOC §3.1; XLS → users | 1 | Login with username + password; disabled users cannot log in | Implemented | LoginRolesTest: login, wrong password, disabled, disabled mid-session |
 | R-02 | DOC §1, §3.1 | 1 | Admin can do everything; Staff limited to billing, receipts, expenses, stock view | Implemented (later modules add their permissions) | LoginRolesTest: role mirror, admin gate, staff forbidden |
 | R-03 | DOC §3.1 | 1 | Admin adds users, disables them, resets passwords | Implemented | LoginRolesTest: create, validate, disable + reset, blank keeps password, no self-demote, profile cannot escalate |
-| R-04 | DOC §3.2; XLS → shop_settings | 2 | Shop details, numbering, print size, rounding saved and used | Not started | |
+| R-04 | DOC §3.2; XLS → shop_settings | 2 | Shop details, numbering, print size, rounding saved and used | Implemented (print size / rounding applied in Module 8) | ShopSettingsTest: save + logo, validation, auth, defaults, sequences, stale-counter guard |
 | R-05 | DOC §3.3; XLS → categories, taxes, payment_modes, expense_categories | 3 | CRUD for each master; in-use masters cannot be deleted | Not started | |
 | R-06 | DOC §3.3; XLS → units | 3 | Unit has base unit + factor; base unit factor = 1 | Not started | |
 | R-07 | DOC §4.1; XLS → products, product_quick_qtys | 4 | Product fields per table; code unique; quick quantities | Not started | |

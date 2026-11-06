@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\ResetPasswordController;
 use App\Http\Controllers\Backend\AccountController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\RoleController;
 
 Route::prefix(env('ADMIN_PATH'))->group(function () {
@@ -26,6 +27,8 @@ Route::prefix(env('ADMIN_PATH'))->group(function () {
 
         Route::get('dashboard', [DashboardController::class, 'index']);
         Route::middleware('can:admin-only')->group(function () {
+            Route::get('settings', [SettingController::class, 'edit']);
+            Route::put('settings', [SettingController::class, 'update']);
             Route::resource('users', UserController::class)->except(['show', 'destroy']);
             Route::resource('roles', RoleController::class)->except(['show']);
         });

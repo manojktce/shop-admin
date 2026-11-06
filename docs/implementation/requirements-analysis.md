@@ -55,6 +55,8 @@ DOC §9.3: base unit, conversion factor, stock ledger, credit sale, receipt, out
 | A-07 | `sales.cancel_reason` and `cash_movements.cancel_reason` columns added | DOC §6.4/§7.2 require a reason; XLS has no column |
 | A-08 | A bill can be cancelled only while its day is open | BR-15 |
 | A-09 | Customer receipt amount cannot exceed balance due | Not specified; prevents negative balances |
+| A-11 | Invoice prefix includes the year (`INV-2026-`); it does not roll over automatically – Admin edits the prefix (and may reset the counter) at year change | DOC §3.2 example only |
+| A-12 | Settings counters can be raised but never lowered below numbers already used | Prevents duplicate document numbers |
 | A-10 | Supplier bill attachments stored on the private disk, downloaded through an authorised route | Security |
 
 ## Dependency issue found
