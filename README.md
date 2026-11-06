@@ -1,58 +1,74 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Claude Code Agent Team
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A reusable Claude Code agent setup for **existing and new Laravel projects**.
 
-## About Laravel
+## Included
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- `CLAUDE.md` — main coordinator instructions and project-wide guardrails.
+- `.claude/agents/` — specialist subagents:
+- `.claude/skills/requirements-to-pr/SKILL.md` — end-to-end requirements-to-PR workflow:
+  - `project-analyst.md`
+  - `backend-developer.md`
+  - `frontend-developer.md`
+  - `database-specialist.md`
+  - `qa-engineer.md`
+  - `security-auditor.md`
+  - `code-reviewer.md`
+  - `documentation-specialist.md`
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Install
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Back up your current `CLAUDE.md` and `.claude/` folder if they already exist.
+2. Copy the `CLAUDE.md` file and `.claude/` folder from this package into the root of your Laravel repository.
+3. Keep your existing project-specific instructions. Merge them rather than blindly overwriting them.
+4. Start or restart Claude Code in the repository.
+5. Run `/agents` and confirm the specialist agents are listed.
+6. Ask Claude to analyse the project before assigning implementation work.
 
-## Learning Laravel
+These are project-level agents. To share them across all your repositories, copy the agent files into `~/.claude/agents/` instead. Keep project-specific rules in each repository's `CLAUDE.md`.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Recommended first prompt
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+> Read CLAUDE.md and inspect this Laravel repository. Use the project-analyst agent to produce a concise architecture and conventions report. Do not modify any files. Identify the Laravel/PHP versions, application structure, test setup, frontend stack, database approach, and existing patterns. Clearly distinguish verified facts from assumptions.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Recommended task workflow
 
-## Agentic Development
+1. Main Claude session acts as **Laravel Team Lead**.
+2. Project Analyst inspects unfamiliar projects or high-impact changes.
+3. Backend / Frontend / Database specialists implement only their assigned scope.
+4. QA Engineer runs relevant tests and reports failures.
+5. Security Auditor and Code Reviewer independently inspect the changes.
+6. Documentation Specialist updates docs when requested or when a feature changes documented behaviour.
+7. You approve risky commands, migrations, commits, pushes and pull requests.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Important operating rules
 
-```bash
-composer require laravel/boost --dev
+- Agents do not replace your judgement. Review diffs and test results.
+- Never assume a Laravel version, PHP version, database, frontend stack or package is installed. Inspect first.
+- Never run production migrations, destructive database commands, deployment commands, or change secrets without explicit approval.
+- Do not let two implementation agents edit the same files concurrently.
+- For existing projects, preserve established architecture unless the task explicitly requires a change.
+- For new projects, use the Laravel version's conventions and the project's chosen starter kit and stack.
+- Tests must be reported honestly. Do not claim tests passed unless they were actually run and passed.
 
-php artisan boost:install
-```
+## Example prompts
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### Existing project feature
+> Implement the requested feature in this existing Laravel project. First inspect the relevant code and follow CLAUDE.md. Use the project analyst if the architecture or existing pattern is unclear. Delegate implementation to the appropriate specialist, then ask QA, security and code review agents to inspect the final diff. Do not commit or push.
 
-## Contributing
+### New Laravel project
+> Help establish this new Laravel project. Inspect the installed Laravel and PHP versions and the selected starter kit first. Propose a minimal structure and implementation plan before creating files. Follow current Laravel conventions and ask before installing packages or making irreversible changes.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Review only
+> Review the current git diff for correctness, security, performance and maintainability. Use the code-reviewer and security-auditor agents. Do not edit files.
 
-## Code of Conduct
+## Customisation
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+After the initial project analysis, add verified project-specific facts to `CLAUDE.md` or scoped rules. Avoid copying assumptions from one Laravel application into another.
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Requirements-to-PR workflow
 
-## License
+Use `/requirements-to-pr` in Claude Code after placing/providing the requirement document and related workbook. The skill analyses the inputs, creates a module plan and traceability matrix, executes modules with the relevant agents, verifies the full change, and creates a GitHub PR when all checks pass and `gh` is authenticated. It does not merge the PR.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The workflow may pause for genuinely blocking requirement questions, a dirty pre-existing worktree, material dependency decisions, or safety-sensitive operations. It does not require you to manually run agents for each module.
