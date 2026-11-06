@@ -18,8 +18,12 @@ class Unit extends Model
 {
     use GuardsUsage;
 
-    /** Products and stock modules add their relations. */
-    protected static array $usageRelations = ['derivedUnits' => 'other units'];
+    /** Stock and billing modules add their relations. */
+    protected static array $usageRelations = [
+        'derivedUnits' => 'other units',
+        'products' => 'products',
+        'quickQtys' => 'product quick quantities',
+    ];
 
     protected function casts(): array
     {
@@ -34,6 +38,23 @@ class Unit extends Model
     public function derivedUnits(): HasMany
     {
         return $this->hasMany(Unit::class, 'base_unit_id');
+    }
+
+    /** Products whose stock is counted in this (base) unit. */
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class, 'base_unit_id');
+    }
+
+    public function quickQtys(): HasMany
+    {
+        return $this->hasMany(ProductQuickQty::class);
+    }
+
+    /** Used by products or their quick quantities: base unit and factor must not change. */
+    public function isUsedByProducts(): bool
+    {
+        return $this->products()->exists() || $this->quickQtys()->exists();
     }
 
     public function isBase(): bool
