@@ -5,7 +5,7 @@
 | 0 | Dependency fix | PR created | fix/composer-dependencies | 9d822a4 | https://github.com/manojktce/shop-admin/pull/1 | clean worktree: artisan boots; `php artisan test` 2/2 passed |
 | 1 | Login & roles | PR created | feature/login-roles | bace91d | https://github.com/manojktce/shop-admin/pull/2 (stacked on #1) | `php artisan test` 22/22 passed; code-reviewer + security-auditor findings fixed |
 | 2 | Shop settings | PR created | feature/shop-settings | d191ca3 | https://github.com/manojktce/shop-admin/pull/3 (stacked on #2) | `php artisan test` 35/35 passed; code-reviewer findings fixed |
-| 3 | Masters | Not started | | | | |
+| 3 | Masters | Verified – pushed, PR pending (gh CLI not installed) | feature/masters | e5f6a77 | to target `feature/login-roles` (stacked on #2) | `php8.5 artisan test` 71/71 passed (MastersTest 36); code-reviewer finding (factor precision) fixed; security-auditor: no issues |
 | 4 | Products | Not started | | | | |
 | 5 | Stock | Not started | | | | |
 | 6 | Daily cash & expenses | Not started | | | | |
