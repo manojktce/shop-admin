@@ -2,47 +2,44 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-
 use App\Models\User;
-use Spatie\Permission\Models\Role;
+use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
+/**
+ * Two roles (requirements §1, §3.1):
+ *  Admin – everything (also granted by Gate::before for users.role = admin).
+ *  Staff – billing, customer receipts, petty expenses, stock view. Each module adds
+ *          its permissions to $permissions with the subset granted to Staff.
+ */
 class RolePermissionSeeder extends Seeder
 {
+    /** [group, permissions, permissions also granted to Staff] */
+    public static array $permissions = [
+        ['Users', ['user.list', 'user.create', 'user.edit'], []],
+        ['Roles', ['role.list', 'role.create', 'role.edit', 'role.delete'], []],
+    ];
+
     public function run(): void
     {
-        $superAdmin = User::$superAdmin;
-        $admin = User::$admin;
-        $customer = User::$customer;
-        
-        $roles = [
-            $superAdmin,
-            $admin,
-            $customer,
-        ];
+        app(PermissionRegistrar::class)->forgetCachedPermissions();
 
-        foreach ($roles as $role) {
-            Role::firstOrCreate(['name' => $role]);
-        }
+        $admin = Role::firstOrCreate(['name' => User::$admin]);
+        $staff = Role::firstOrCreate(['name' => User::$staff]);
 
-        $permissions = [
-            ['Customers', ['customer.list', 'customer.create', 'customer.edit', 'customer.delete'], [$admin]],
-            ['Roles', ['role.list', 'role.create', 'role.edit', 'role.delete'], [$admin]],
-        ];
+        foreach (static::$permissions as [$group, $names, $staffNames]) {
+            foreach ($names as $name) {
+                $permission = Permission::firstOrCreate(['name' => $name], ['group_name' => $group]);
+                $admin->givePermissionTo($permission);
 
-        foreach ($permissions as $perm) {
-            foreach ($perm[1] as $permissionName) {
-                $permission = Permission::firstOrCreate(['group_name' => $perm[0], 'name' => $permissionName]);
-
-                if (isset($perm[2])) {
-                    foreach ($perm[2] as $roleName) {
-                        $role = Role::where('name', $roleName)->first();
-                        $role->givePermissionTo($permission);
-                    }
+                if (in_array($name, $staffNames, true)) {
+                    $staff->givePermissionTo($permission);
                 }
             }
         }
+
+        app(PermissionRegistrar::class)->forgetCachedPermissions();
     }
 }

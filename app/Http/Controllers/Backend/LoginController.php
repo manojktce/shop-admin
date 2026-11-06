@@ -13,12 +13,12 @@ class LoginController extends Controller
     {
         if ($request->isMethod('post')) {
             $credentials = $request->validate([
-                'email' => ['required', 'email'],
+                'username' => ['required', 'string', 'max:50'],
                 'password' => ['required'],
             ]);
             
             if (Auth::attempt($credentials)) {
-                if (Auth::user()->status == '1') {
+                if (Auth::user()->is_active) {
                     $request->session()->regenerate();
      
                     return redirect()->intended(baseURL('dashboard'));

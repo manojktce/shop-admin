@@ -3,9 +3,9 @@
     <x-backend::ui.alerts />
     {{ html()->form('post', baseURL())->open() }}
         <div class="mb-3">
-            <x-backend::form.label name="Email" for="email" required/>
-            <x-backend::form.input name="email" id="email" placeholder="Enter Email" value="{{ old('email') }}"/>
-            <x-backend::form.error name="email" :errors="$errors"/>
+            <x-backend::form.label name="Username" for="username" required/>
+            <x-backend::form.input name="username" id="username" placeholder="Enter Username" value="{{ old('username') }}" autocomplete="username"/>
+            <x-backend::form.error name="username" :errors="$errors"/>
         </div>
         <div class="mb-4">
             <x-backend::form.label name="Password" for="password" required/>

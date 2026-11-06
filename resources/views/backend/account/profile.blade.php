@@ -27,7 +27,7 @@
                         <x-backend::form.error name="name" :errors="$errors"/>
                     </div>
                     <div class="col-md-6">
-                        <x-backend::form.label name="Email" for="email" required/>
+                        <x-backend::form.label name="Email" for="email"/>
                         <x-backend::form.input name="email" id="email" placeholder="Enter Email" value="{{ $email }}"/>
                         <x-backend::form.error name="email" :errors="$errors"/>
                     </div>
@@ -37,7 +37,7 @@
                         <x-backend::form.error name="password" :errors="$errors"/>
                     </div>
                     <div class="col-md-6">
-                        <x-backend::form.label name="Mobile Number" for="mobile" required/>
+                        <x-backend::form.label name="Mobile Number" for="mobile"/>
                         <x-backend::form.input name="mobile" id="mobile" placeholder="Enter Mobile Number" value="{{ $mobile }}"/>
                         <x-backend::form.error name="mobile" :errors="$errors"/>
                     </div>

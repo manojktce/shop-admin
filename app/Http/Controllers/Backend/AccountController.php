@@ -17,6 +17,7 @@ class AccountController extends BaseController
 
     public function profile(Request $request)
     {
+        $this->initializeCrud();
         $id = auth()->user()->id;
 
         $record = $this->_select($id);
@@ -40,22 +41,26 @@ class AccountController extends BaseController
         return [
             'rules' => [
                 'name' => 'required',
-                'email' => 'required|email|unique:users,email'.($id == '' ? '' : ','.$id),
-                'password' => $id=='' ? 'required' : '',
-                'mobile' => 'required|numeric'
+                'email' => 'nullable|email|max:150|unique:users,email'.($id == '' ? '' : ','.$id),
+                'password' => 'nullable|string|min:6',
+                'mobile' => 'nullable|numeric'
             ]
         ];
     }
 
     public function _beforeSave($request) 
     {
+        // Users may change only their own profile fields — never role, username or active flag.
+        $request = array_intersect_key($request, array_flip(['name', 'email', 'password', 'mobile', 'dob', 'gender', 'image_hidden']));
+        $request['image_hidden'] = $request['image_hidden'] ?? null;
+
         $request['image'] = $this->uploadFile(
             $this->_model()->image_storage_path,
             'image',
             $request['image_hidden']
         );
         
-        if ($request['password']=='') {
+        if (blank($request['password'] ?? null)) {
             unset($request['password']);
         }
         
