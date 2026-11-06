@@ -1,0 +1,71 @@
+body{
+    background: #F3F5F7;
+}
+
+.body-wrapper {
+    padding-top: 70px;
+}
+
+.topbar{
+    background: #5E86F7;
+}
+
+.left-sidebar .scroll-sidebar {
+    height: unset;
+}
+
+.table.dataTable{
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.table-responsive .dataTables_wrapper .dataTables_filter{
+    margin-bottom: 0;
+}
+
+div.dataTables_wrapper div.dataTables_info{
+    padding-top: 7px;
+}
+
+div.dataTables_wrapper div.dataTables_paginate{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.datatable-icons a{
+    padding: 6px 12px;
+}
+
+.datatable-icons a:not(:last-child){
+    margin-right: 5px;
+}
+
+.detail-view div{
+    border-bottom: 1px solid lightgrey;
+    padding: 10px 0;
+}
+
+.detail-view div:first-child{
+    padding-top: 0;
+}
+
+.detail-view div:last-child{
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.detail-view div label{
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.detail-view div p{
+    margin: 0;
+}
+
+.tagline{
+    font-size: 10px;
+    color: red;
+    margin: 2px 0;
+}
