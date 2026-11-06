@@ -20,3 +20,5 @@ Base branch: `main` (from `origin/HEAD`). Each module branch is created from the
 
 ## Test plan
 Pest feature tests per module (sqlite in-memory, `RefreshDatabase`): success, validation, authorization (Admin vs Staff vs guest), business rules (conversion, ledgers, expected cash, credit limit, negative stock, cancel reversal). Each PR runs `php artisan test`; final regression on the last branch runs the full suite.
+
+Environment note (2026-11-06): the default `php` (8.4) on the dev machine has no `pdo_sqlite`, so the suite is run with `php8.5 artisan test` (also satisfies `php ^8.3`). No `.env` change.

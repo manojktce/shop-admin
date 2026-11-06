@@ -57,6 +57,11 @@ DOC §9.3: base unit, conversion factor, stock ledger, credit sale, receipt, out
 | A-09 | Customer receipt amount cannot exceed balance due | Not specified; prevents negative balances |
 | A-11 | Invoice prefix includes the year (`INV-2026-`); it does not roll over automatically – Admin edits the prefix (and may reset the counter) at year change | DOC §3.2 example only |
 | A-12 | Settings counters can be raised but never lowered below numbers already used | Prevents duplicate document numbers |
+| A-13 | Masters screens are Admin only; Staff reads masters only through other screens (billing, expenses) | DOC §1 "Admin: … masters" |
+| A-14 | Units have one level: a derived unit points to a base unit (no chains); a unit that others are based on stays a base unit; base unit factor forced to 1 | DOC §3.3 table; XLS → units → E8–E9 |
+| A-15 | Tax rate 0–100 with up to 2 decimals; tax names need not be unique | XLS → taxes (no UNIQUE on name) |
+| A-16 | Starter data seeds the sample units (kg, g, qtl, litre, ml, pcs, box), taxes, payment modes and expense categories; categories are shop specific and not seeded | DOC §3.3 samples; XLS sample rows |
+| A-17 | In-use guard: a master referenced by other records cannot be deleted (inactive is offered instead). In Module 3 only units reference units; Modules 4–10 register their relations in `$usageRelations` | Module plan |
 | A-10 | Supplier bill attachments stored on the private disk, downloaded through an authorised route | Security |
 
 ## Dependency issue found
