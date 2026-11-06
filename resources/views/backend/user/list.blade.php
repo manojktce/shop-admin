@@ -1,17 +1,12 @@
 <x-backend.layouts.full>
     <x-slot:breadcrumb>
-        <x-backend::ui.breadcrumb 
-            title="Customers"
-            :crumbs="[
-                ['title' => 'All Customers']
-            ]"
-        />
+        <x-backend::ui.breadcrumb title="Users" :crumbs="[['title' => 'All Users']]" />
     </x-slot:breadcrumb>
     <x-backend::ui.alerts />
 
     @permission($permissions['create'])
         <div class="d-flex justify-content-end mb-3">
-            <a href="{{ baseURL('customers/create') }}" class="btn btn-dark">Create</a>
+            <a href="{{ baseURL('users/create') }}" class="btn btn-dark">Create</a>
         </div>
     @endpermission
 
@@ -23,4 +18,3 @@
         </div>
     </div>
 </x-backend.layouts.full>
-

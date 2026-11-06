@@ -17,7 +17,7 @@ class RoleDataTable extends BaseDataTable
 
     public function query(Role $model): QueryBuilder
     {
-        return $model->newQuery()->whereNotIn('name', [User::$superAdmin, User::$customer])->with('permissions');
+        return $model->newQuery()->whereNotIn('name', [User::$admin])->with('permissions');
     }
 
     public function columns($query)
