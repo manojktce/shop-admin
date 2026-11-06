@@ -7,6 +7,17 @@ $sidebarMenu = [
         'permission' => null,
     ],
     [
+        'title' => 'Masters',
+        'icon' => 'list-details',
+        'children' => [
+            ['title' => 'Categories', 'icon' => 'circle', 'url' => baseURL('categories'), 'permission' => 'category.list'],
+            ['title' => 'Units', 'icon' => 'circle', 'url' => baseURL('units'), 'permission' => 'unit.list'],
+            ['title' => 'Tax (GST)', 'icon' => 'circle', 'url' => baseURL('taxes'), 'permission' => 'tax.list'],
+            ['title' => 'Payment modes', 'icon' => 'circle', 'url' => baseURL('payment-modes'), 'permission' => 'payment_mode.list'],
+            ['title' => 'Expense categories', 'icon' => 'circle', 'url' => baseURL('expense-categories'), 'permission' => 'expense_category.list'],
+        ]
+    ],
+    [
         'title' => 'Settings',
         'icon' => 'settings',
         'children' => [

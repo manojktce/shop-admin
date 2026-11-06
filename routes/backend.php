@@ -10,6 +10,11 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\RoleController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\UnitController;
+use App\Http\Controllers\Backend\TaxController;
+use App\Http\Controllers\Backend\PaymentModeController;
+use App\Http\Controllers\Backend\ExpenseCategoryController;
 
 Route::prefix(env('ADMIN_PATH'))->group(function () {
 
@@ -31,6 +36,13 @@ Route::prefix(env('ADMIN_PATH'))->group(function () {
             Route::put('settings', [SettingController::class, 'update']);
             Route::resource('users', UserController::class)->except(['show', 'destroy']);
             Route::resource('roles', RoleController::class)->except(['show']);
+
+            // Masters (requirements §3.3)
+            Route::resource('categories', CategoryController::class)->except(['show']);
+            Route::resource('units', UnitController::class)->except(['show']);
+            Route::resource('taxes', TaxController::class)->except(['show']);
+            Route::resource('payment-modes', PaymentModeController::class)->except(['show']);
+            Route::resource('expense-categories', ExpenseCategoryController::class)->except(['show']);
         });
     });
 

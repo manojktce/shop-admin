@@ -60,6 +60,13 @@ trait ActionTrait
 
         try {
             return DB::transaction(function () use ($record) {
+                // Records that are in use (see App\Models\Concerns\GuardsUsage) cannot be deleted.
+                if (method_exists($record, 'usedBy') && ($usedBy = $record->usedBy())) {
+                    $hint = array_key_exists('is_active', $record->getAttributes()) ? ' Mark it inactive instead.' : '';
+
+                    return $this->_errorResponse("{$this->message} cannot be deleted because it is used by {$usedBy}.{$hint}");
+                }
+
                 if (method_exists($this, '_beforeDelete')) {
                     $this->_beforeDelete($record);
                 }
