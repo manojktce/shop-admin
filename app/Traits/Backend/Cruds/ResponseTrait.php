@@ -10,7 +10,7 @@ trait ResponseTrait
             return apiResponse(true, $message, $data);
         }
 
-        return redirect($redirect)->with('success', $message);
+        return redirect($redirect ?? baseURL($this->redirect ?? ''))->with('success', $message);
     }
 
     protected function _errorResponse($message = 'Something went wrong.', $data = [], $redirect = null) {
@@ -18,6 +18,6 @@ trait ResponseTrait
             return apiResponse(false, $message, $data, 500);
         }
 
-        return redirect($redirect)->with('danger', $message);
+        return ($redirect ? redirect($redirect) : redirect()->back()->withInput())->with('danger', $message);
     }
 }

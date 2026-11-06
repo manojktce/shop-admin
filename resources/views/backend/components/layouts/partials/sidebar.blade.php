@@ -7,15 +7,21 @@ $sidebarMenu = [
         'permission' => null,
     ],
     [
-        'title' => 'Customers',
-        'icon' => 'user',
-        'url'  => baseURL('customers'),
-        'permission' => 'customer.list',
-    ],
-    [
         'title' => 'Settings',
         'icon' => 'settings',
         'children' => [
+            [
+                'title' => 'Shop settings',
+                'icon' => 'circle',
+                'url'  => baseURL('settings'),
+                'permission' => 'setting.edit',
+            ],
+            [
+                'title' => 'Users',
+                'icon' => 'circle',
+                'url'  => baseURL('users'),
+                'permission' => 'user.list',
+            ],
             [
                 'title' => 'Roles',
                 'icon' => 'circle',
