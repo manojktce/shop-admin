@@ -68,6 +68,7 @@ DOC §9.3: base unit, conversion factor, stock ledger, credit sale, receipt, out
 | A-21 | New products need an active category and tax; an inactive value already assigned stays valid on edit | Masters have is_active |
 | A-22 | Code: letters, digits, dash, underscore (max 20, unique); image jpg/png/webp ≤ 2 MB stored on the public disk under `products/` | DOC §4.1; XLS sample `products/r01.jpg` |
 | A-23 | A unit used by products or quick quantities keeps its base unit and factor (name/short name may change); categories, taxes and units used by products cannot be deleted | Stock integrity |
+| A-24 | Staff who record stock-in enter the cost per base unit and can see costs on stock entries (user decision 2026-11-10); product sale prices stay on Admin-only Products screens | User decision; DOC §4.3 |
 | A-10 | Supplier bill attachments stored on the private disk, downloaded through an authorised route | Security |
 
 ## Dependency issue found
