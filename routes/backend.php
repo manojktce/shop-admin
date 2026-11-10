@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\UnitController;
 use App\Http\Controllers\Backend\TaxController;
 use App\Http\Controllers\Backend\PaymentModeController;
 use App\Http\Controllers\Backend\ExpenseCategoryController;
+use App\Http\Controllers\Backend\ProductController;
 
 Route::prefix(env('ADMIN_PATH'))->group(function () {
 
@@ -43,6 +44,9 @@ Route::prefix(env('ADMIN_PATH'))->group(function () {
             Route::resource('taxes', TaxController::class)->except(['show']);
             Route::resource('payment-modes', PaymentModeController::class)->except(['show']);
             Route::resource('expense-categories', ExpenseCategoryController::class)->except(['show']);
+
+            // Products (requirements §4.1)
+            Route::resource('products', ProductController::class)->except(['show']);
         });
     });
 

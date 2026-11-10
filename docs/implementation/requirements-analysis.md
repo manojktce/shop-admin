@@ -62,6 +62,12 @@ DOC §9.3: base unit, conversion factor, stock ledger, credit sale, receipt, out
 | A-15 | Tax rate 0–100 with up to 2 decimals; tax names need not be unique | XLS → taxes (no UNIQUE on name) |
 | A-16 | Starter data seeds the sample units (kg, g, qtl, litre, ml, pcs, box), taxes, payment modes and expense categories; categories are shop specific and not seeded | DOC §3.3 samples; XLS sample rows |
 | A-17 | In-use guard: a master referenced by other records cannot be deleted (inactive is offered instead). In Module 3 only units reference units; Modules 4–10 register their relations in `$usageRelations` | Module plan |
+| A-18 | Products screens are Admin only (prices are Admin data); Staff "stock view" is delivered by the Stock module | DOC §1 |
+| A-19 | `current_stock` is never entered on the product form; it starts at 0 and only the Stock module changes it (opening stock = adjustment) | DOC §4.4; XLS → products → E15 |
+| A-20 | Product base unit must be a base unit and cannot change while stock ≠ 0; quick-quantity units must convert to the product's base unit; a product not sold loose needs whole base quantities in its quick buttons; max 10 quick quantities | DOC §3.3, §4.1 |
+| A-21 | New products need an active category and tax; an inactive value already assigned stays valid on edit | Masters have is_active |
+| A-22 | Code: letters, digits, dash, underscore (max 20, unique); image jpg/png/webp ≤ 2 MB stored on the public disk under `products/` | DOC §4.1; XLS sample `products/r01.jpg` |
+| A-23 | A unit used by products or quick quantities keeps its base unit and factor (name/short name may change); categories, taxes and units used by products cannot be deleted | Stock integrity |
 | A-10 | Supplier bill attachments stored on the private disk, downloaded through an authorised route | Security |
 
 ## Dependency issue found

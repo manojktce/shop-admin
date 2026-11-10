@@ -25,6 +25,7 @@ class RolePermissionSeeder extends Seeder
         ['Units', ['unit.list', 'unit.create', 'unit.edit', 'unit.delete'], []],
         ['Taxes', ['tax.list', 'tax.create', 'tax.edit', 'tax.delete'], []],
         ['Payment modes', ['payment_mode.list', 'payment_mode.create', 'payment_mode.edit', 'payment_mode.delete'], []],
+        ['Products', ['product.list', 'product.create', 'product.edit', 'product.delete'], []],
         ['Expense categories', ['expense_category.list', 'expense_category.create', 'expense_category.edit', 'expense_category.delete'], []],
     ];
 
