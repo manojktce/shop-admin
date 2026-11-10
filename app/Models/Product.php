@@ -18,7 +18,9 @@ class Product extends Model
     use GuardsUsage;
 
     /** Stock and billing modules add their relations. */
-    protected static array $usageRelations = [];
+    protected static array $usageRelations = [
+        'stockMovements' => 'stock movements',
+    ];
 
     protected function casts(): array
     {
@@ -50,6 +52,11 @@ class Product extends Model
     public function quickQtys(): HasMany
     {
         return $this->hasMany(ProductQuickQty::class)->orderBy('sort_order');
+    }
+
+    public function stockMovements(): HasMany
+    {
+        return $this->hasMany(StockMovement::class);
     }
 
     public function scopeActive($query)

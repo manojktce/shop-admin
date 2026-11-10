@@ -16,6 +16,9 @@ use App\Http\Controllers\Backend\TaxController;
 use App\Http\Controllers\Backend\PaymentModeController;
 use App\Http\Controllers\Backend\ExpenseCategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\StockController;
+use App\Http\Controllers\Backend\StockEntryController;
+use App\Http\Controllers\Backend\StockAdjustmentController;
 
 Route::prefix(env('ADMIN_PATH'))->group(function () {
 
@@ -32,6 +35,13 @@ Route::prefix(env('ADMIN_PATH'))->group(function () {
         Route::match(['get', 'put'], 'profile', [AccountController::class, 'profile']);
 
         Route::get('dashboard', [DashboardController::class, 'index']);
+
+        // Stock (requirements §4.2; A-03: Admin and Staff). Entries and adjustments are immutable.
+        Route::get('stock', [StockController::class, 'index']);
+        Route::get('stock/{product}/ledger', [StockController::class, 'ledger'])->whereNumber('product');
+        Route::resource('stock-entries', StockEntryController::class)->only(['index', 'create', 'store', 'show']);
+        Route::resource('stock-adjustments', StockAdjustmentController::class)->only(['index', 'create', 'store']);
+
         Route::middleware('can:admin-only')->group(function () {
             Route::get('settings', [SettingController::class, 'edit']);
             Route::put('settings', [SettingController::class, 'update']);

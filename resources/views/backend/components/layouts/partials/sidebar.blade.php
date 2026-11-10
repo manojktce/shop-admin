@@ -13,6 +13,16 @@ $sidebarMenu = [
         'permission' => 'product.list',
     ],
     [
+        'title' => 'Stock',
+        'icon' => 'building-warehouse',
+        'children' => [
+            ['title' => 'Stock in', 'icon' => 'circle', 'url' => baseURL('stock-entries'), 'permission' => null],
+            ['title' => 'Adjustments', 'icon' => 'circle', 'url' => baseURL('stock-adjustments'), 'permission' => null],
+            ['title' => 'Stock list', 'icon' => 'circle', 'url' => baseURL('stock'), 'permission' => null],
+            ['title' => 'Low stock', 'icon' => 'circle', 'url' => baseURL('stock?low=1'), 'permission' => null],
+        ]
+    ],
+    [
         'title' => 'Masters',
         'icon' => 'list-details',
         'children' => [
